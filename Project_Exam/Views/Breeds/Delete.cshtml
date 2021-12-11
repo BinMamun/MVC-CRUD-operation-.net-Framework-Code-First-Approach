@@ -1,0 +1,71 @@
+﻿@model Project_Exam.Models.Breed
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="row mb-2 ">
+    <div class="col-2">
+        <a title="info" class="btn btn-outline-dark" href="@Url.Action("info","Breeds", new {@id = Model.BreedId })"><i class="bi bi-info-lg"></i></a>
+        <a title="Edit" class="btn btn-outline-dark" href="@Url.Action("Edit","Breeds", new {@id = Model.BreedId })"><i class="bi bi-pencil"></i></a>
+    </div>
+
+    <div class=" text-center col-8">
+        <h3 class="text-danger">Do you really want to delete this record?</h3>
+    </div>
+</div>
+<hr />
+
+
+@using (Ajax.BeginForm(new AjaxOptions
+{
+    HttpMethod = "Post"
+                                       ,
+    InsertionMode = InsertionMode.Replace
+                                       ,
+    UpdateTargetId = "form0"
+}))
+{
+    @Html.HiddenFor(x => x.BreedId)
+    <div class="form-group row offset-3 mb-2">
+        @Html.LabelFor(x => x.BreedName, new { @class = "col-form-label col-2" })
+        <div class="col-4">
+            @Html.TextBoxFor(x => x.BreedName, new { @readonly = "true", @class = "form-control" })
+        </div>       
+    </div>
+    <div class="form-group row offset-3 mb-2">
+        @Html.LabelFor(x => x.AverageAge, new { @class = "col-form-label col-2" })
+        <div class="col-4">
+            @Html.TextBoxFor(x => x.AverageAge, new { @readonly = "true", @class = "form-control" })
+        </div>       
+    </div>
+    <div class="form-group row offset-3 mb-2">
+        @Html.LabelFor(x => x.Description, new { @class = "col-form-label col-2" })
+        <div class="col-4">
+            @Html.TextAreaFor(x => x.Description, new { @readonly = "true", @class = "form-control" })
+        </div>       
+    </div>
+    <div class="form-group row offset-3 mb-2">
+
+        <div class="col-4 offset-3">
+            <button type="submit" class="btn btn-outline-danger">Delete</button>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-2">
+        @Html.ActionLink("Back to List", "Index", "Breeds", new { @class = "btn btn-link" })
+    </div>
+</div>
+
+@section styles{
+
+    <link href="~/Content/icons/font/bootstrap-icons.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
+
+
+

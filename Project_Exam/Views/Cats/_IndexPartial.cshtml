@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Project_Exam.Models.Cat>
+
+<div class="row mb-2 text-center">
+    <div class="col-12">
+        <h2 class="text-success">Cats List</h2>
+    </div>
+</div>
+<hr />
+<div class="row mb-2 ">
+    <div class="col-12 d-flex justify-content-end">
+        <a title="Add new" class="btn btn-outline-success" href="@Url.Action("Create", "Cats")"><i class="bi bi-plus-lg"></i></a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-hover">
+            <thead class="text-center table-dark table-bordered">
+                <tr>
+                    <th>@Html.DisplayNameFor(x => x.Picture)</th>
+                    <th>@Html.DisplayNameFor(x => x.CatName)</th>
+                    <th>@Html.DisplayNameFor(x => x.Breed)</th>
+                    <th>@Html.DisplayNameFor(x => x.Dob)</th>
+                    <th>@Html.DisplayNameFor(x => x.Gender)</th>
+                    <th>@Html.DisplayNameFor(x => x.Available)</th>
+                    <th><i class="bi bi-gear-fill"></i></th>
+                </tr>
+            </thead>
+
+            <tbody class="text-center align-middle">
+                @foreach (var c in Model)
+                {
+                    <tr class="table-warning align-middle">
+                        <td><img src="~/Uploads/@c.Picture" width="45" class="border-mod" /></td>
+                        <td>@Html.DisplayFor(x => c.CatName)</td>
+                        <td>@Html.DisplayFor(x => c.Breed.BreedName)</td>
+                        <td>@Html.DisplayFor(x => c.Dob)</td>
+                        <td>@Html.DisplayFor(x => c.Gender)</td>
+                        <td>@(c.Available? "Yes":"No")</td>
+
+                        <td>
+                            <a title="info" class="btn btn-outline-dark" href="@Url.Action("info","Cats", new { @id = c.CatId})"><i class="bi bi-info-lg"></i></a>
+                            <a title="Edit" class="btn btn-outline-dark" href="@Url.Action("Edit","Cats", new {@id = c.CatId })"><i class="bi bi-pencil"></i></a>
+                            <a title="Delete" class="btn btn-outline-dark" href="@Url.Action("Delete","Cats", new {@id = c.CatId})"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="d-flex justify-content-end">
+        <ul class="pagination">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link bi bi-caret-left-fill" href="@Url.Action("Index", "Cats", new {page = ViewBag.CurrentPage - 1 })"></a>
+                </li>
+            }
+            @for (var i = 1; i <= ViewBag.totalpages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active": "")">
+                    @Html.ActionLink(i.ToString(), "Index", "Cats", new { page = i }, new { @class = "page-link" })
+                </li>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.totalpages)
+            {
+                <li class="page-item">
+                    <a class="page-link bi bi-caret-right-fill" href="@Url.Action("Index", "Cats", new {page = ViewBag.CurrentPage + 1 })"></a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+@section styles{
+
+    <link href="~/Content/icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <style>
+        .border-mod {
+            border: black solid 1px;
+            border-radius: 5px;
+        }
+    </style>
+}

@@ -1,0 +1,85 @@
+﻿@model Project_Exam.Models.Cat
+@{
+    ViewBag.Title = "info";
+}
+
+<div class="row mb-2 ">
+    <div class="col-2">
+        <a title="Edit" class="btn btn-outline-dark" href="@Url.Action("Edit","Cats", new {@id = Model.CatId })"><i class="bi bi-pencil"></i></a>
+        <a title="Delete" class="btn btn-outline-dark" href="@Url.Action("Delete","Cats", new {@id = Model.CatId })"><i class="bi bi-trash"></i></a>
+
+    </div>
+
+    <div class=" text-center col-6">
+        <h2 class="text-info">Cat Info</h2>
+    </div>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-6">
+        <div class="row form-group mb-2 offset-5">
+            @Html.LabelFor(x => x.CatName, new { @class = "col-form-label col-4" })
+            <div class="col-4 pt-2">
+                @Html.DisplayFor(x => x.CatName)
+            </div>
+
+        </div>
+
+        <div class="row form-group mb-2 offset-5">
+            @Html.LabelFor(x => x.Dob, new { @class = "col-form-label col-4" })
+            <div class="col-4 pt-2">
+                @Html.DisplayFor(x => x.Dob)
+            </div>
+        </div>
+
+        <div class="row form-group mb-2 offset-5">
+            <label class="col-form-label col-4">Breed</label>
+            <div class="col-4 pt-2">
+                @Html.DisplayFor(x => x.Breed.BreedName)
+            </div>
+        </div>
+
+        <div class="row form-group mb-2 offset-5">
+            @Html.LabelFor(x => x.Gender, new { @class = "col-form-label col-4" })
+            <div class="col-4 pt-2">
+                @Html.DisplayFor(x => x.Gender)
+            </div>
+
+        </div>
+        <div class="row form-group mb-2 offset-5">
+            @Html.LabelFor(x => x.Available, new { @class = "col-form-label col-4" })
+
+            <div class="col-4 pt-2">
+                @(Model.Available? "Yes":"No")
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class=" pt-2">
+            <img src="~/Uploads/@Model.Picture" width="200" class="img-fluid border-mod" />
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-2">
+        @Html.ActionLink("Back to List", "Index", "Cats", new { @class = "btn btn-link" })
+    </div>
+</div>
+
+
+
+@section styles{
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <style>
+        .border-mod {
+            border: black solid 1px;
+            border-radius: 5px;
+        }
+    </style>
+}
+

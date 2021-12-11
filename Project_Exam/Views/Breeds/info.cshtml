@@ -1,0 +1,57 @@
+﻿@model Project_Exam.Models.Breed
+@{
+    ViewBag.Title = "info";
+}
+
+
+<div class="row mb-2 " >
+    <div class="col-2">
+        <a title="Edit" class="btn btn-outline-dark" href="@Url.Action("Edit","Breeds", new {@id = Model.BreedId })"><i class="bi bi-pencil"></i></a>
+        <a title="Delete" class="btn btn-outline-dark" href="@Url.Action("Delete","Breeds", new {@id = Model.BreedId })"><i class="bi bi-trash"></i></a>
+    </div>
+
+    <div class=" text-center col-6">
+        <h2>Breed Info</h2>
+    </div>
+</div>
+
+<hr />
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.BreedId)
+    <div class="form-group row offset-4 mb-2">
+        @Html.LabelFor(x => x.BreedName, new { @class = "fw-bold col-form-label col-2" })
+        <div class="col-4 pt-2">
+            @Html.DisplayFor(x => x.BreedName)
+        </div>
+    </div>
+    <div class="form-group row offset-4 mb-2">
+        @Html.LabelFor(x => x.AverageAge, new { @class = "fw-bold col-form-label col-2" })
+        <div class="col-4 pt-2">
+            @Html.DisplayFor(x => x.AverageAge)
+        </div>
+
+    </div>
+    <div class="form-group row offset-4 mb-2">
+        @Html.LabelFor(x => x.Description, new { @class = " fw-bold col-form-label col-2" })
+        <div class="col-4 pt-2">
+            @Html.DisplayFor(x => x.Description)
+        </div>
+    </div>
+    <hr />
+
+}
+<div class="row">
+    <div class="col-2">
+        @Html.ActionLink("Back to List", "Index", "Breeds", new { @class = "btn btn-link" })
+    </div>
+</div>
+
+
+@section styles{
+
+    <link href="~/Content/icons/font/bootstrap-icons.css" rel="stylesheet" />
+}
+
+

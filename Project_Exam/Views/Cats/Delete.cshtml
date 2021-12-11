@@ -1,0 +1,98 @@
+﻿@model Project_Exam.Models.Cat
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="row mb-2 ">
+    <div class="col-2">
+        <a title="info" class="btn btn-outline-dark" href="@Url.Action("info","Cats", new {@id = Model.CatId })"><i class="bi bi-info-lg"></i></a>
+        <a title="Edit" class="btn btn-outline-dark" href="@Url.Action("Edit","Cats", new {@id = Model.CatId })"><i class="bi bi-pencil"></i></a>
+    </div>
+
+    <div class=" text-center col-6">
+        <h2 class="text-danger">Do you really want to delete this Cat record?</h2>
+    </div>
+</div>
+<hr />
+
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="row form-group mb-2 offset-4">
+            @Html.LabelFor(x => x.CatName, new { @class = "col-form-label col-2" })
+            <div class="col-4 pt-2">
+                @Html.DisplayFor(x => x.CatName)
+            </div>
+
+        </div>
+
+        <div class="row form-group mb-2 offset-4">
+            @Html.LabelFor(x => x.Dob, new { @class = "col-form-label col-2" })
+            <div class="col-4 pt-2">
+                @Html.DisplayFor(x => x.Dob)
+            </div>
+        </div>
+
+        <div class="row form-group mb-2 offset-4">
+            <label class="col-form-label col-2">Breed</label>
+            <div class="col-4 pt-2">
+                @Html.DisplayFor(x => x.Breed.BreedName)
+            </div>
+        </div>
+
+        <div class="row form-group mb-2 offset-4">
+            @Html.LabelFor(x => x.Gender, new { @class = "col-form-label col-2" })
+            <div class="col-4 pt-2">
+                @Html.DisplayFor(x => x.Gender)
+            </div>
+
+        </div>
+        <div class="row form-group mb-2 offset-4 ">
+            @Html.LabelFor(x => x.Available, new { @class = "col-form-label col-2" })
+
+            <div class="col-4 pt-2">
+                @(Model.Available? "Yes":"No")
+            </div>
+        </div>
+
+        <div class="row form-group mb-2 offset-4">
+            @Html.LabelFor(x => x.Picture, new { @class = "col-form-label col-2" })
+            <div class="col-3 pt-2">
+                <img src="~/Uploads/@Model.Picture" width="40" class=" border-mod" />
+            </div>
+        </div>
+        @using (Html.BeginForm("Delete", "Cats", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(x=> x.CatId)
+            <div class="form-group row offset-3 mb-2">
+
+                <div class="col-4 offset-2">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2">
+        @Html.ActionLink("Back to List", "Index", "Cats", new { @class = "btn btn-link" })
+    </div>
+</div>
+
+
+
+@section styles{
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <style>
+        .border-mod {
+            border: black solid 1px;
+            border-radius: 5px;
+        }
+    </style>
+}
+

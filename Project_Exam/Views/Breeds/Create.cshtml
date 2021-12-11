@@ -1,0 +1,75 @@
+﻿@model Project_Exam.Models.Breed
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="row  text-center">
+    <div class="col-12">
+        <h2>Add new Breed</h2>
+    </div>
+</div>
+<hr />
+<div id="mgs"></div>
+
+@using (Ajax.BeginForm("Create", "Breeds",
+    new AjaxOptions
+    {
+        HttpMethod = "Post"
+    ,
+        InsertionMode = InsertionMode.Replace
+    ,
+        UpdateTargetId = "mgs"
+    ,
+        OnSuccess = "onsuccess"
+    }))
+{
+    <div class="form-group row offset-3 mb-2 pt-2">
+        @Html.LabelFor(x => x.BreedName, new { @class = "col-form-label col-2" })
+        <div class="col-4">
+            @Html.TextBoxFor(x => x.BreedName, new { @class = "form-control" })
+        </div>
+        @Html.ValidationMessageFor(x => x.BreedName, "", new { @class = "text-danger col-4" })
+    </div>
+
+    <div class="form-group row offset-3 mb-2">
+        @Html.LabelFor(x => x.AverageAge, new { @class = "col-form-label col-2" })
+        <div class="col-4">
+            @Html.TextBoxFor(x => x.AverageAge, new { @class = "form-control" })
+        </div>
+        @Html.ValidationMessageFor(x => x.AverageAge, "", new { @class = "text-danger col-4" })
+    </div>
+
+    <div class="form-group row offset-3 mb-2">
+        @Html.LabelFor(x => x.Description, new { @class = "col-form-label col-2" })
+        <div class="col-4">
+            @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+        </div>
+        @Html.ValidationMessageFor(x => x.Description, "", new { @class = "text-danger col-4" })
+    </div>
+
+    <div class="form-group row offset-3 mb-2">
+        <div class="col-4 offset-3">
+            <button type="submit" class="btn btn-success">Save&nbsp;</button>
+            <button type="reset" class="btn btn-outline-secondary ">Reset</button>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-2">
+        @Html.ActionLink("Back to List", "Index", "Breeds", new { @class = "btn btn-link" })
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        function onsuccess() {
+            $("#form0").trigger("reset")
+        };
+    </script>
+}
+

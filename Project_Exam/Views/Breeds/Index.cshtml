@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Project_Exam.Models.Breed>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row mb-2">
+    <div class="col-12">
+        <h2>Breed List</h2>
+    </div>
+</div>
+
+<div class="row mb-2 ">
+    <div class="col-12 d-flex justify-content-end">
+        <a title="Add new" class="btn btn-outline-success" href="@Url.Action("Create", "Breeds")"><i class="bi bi-plus-lg"></i></a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <table class="table table-hover">
+            <thead class="text-center table-dark table-bordered">
+                <tr>
+                    <th>@Html.DisplayNameFor(x => x.BreedName)</th>
+                    <th>@Html.DisplayNameFor(x => x.Description)</th>
+                    <th>@Html.DisplayNameFor(x => x.AverageAge)</th>
+                    <th><i class="bi bi-gear-fill"></i></th>
+                </tr>
+            </thead>
+
+            <tbody class="text-center align-middle">
+                @foreach (var c in Model)
+                {
+                    <tr class="table-warning align-middle">
+
+                        <td>@Html.DisplayFor(x => c.BreedName)</td>
+                        <td>@Html.DisplayFor(x => c.Description)</td>
+                        <td>@Html.DisplayFor(x => c.AverageAge)</td>
+                        <td>
+                            <a title="info" class="btn btn-outline-dark" href="@Url.Action("info","Breeds", new { @id = c.BreedId})"><i class="bi bi-info-lg"></i></a>
+                            <a title="Edit" class="btn btn-outline-dark" href="@Url.Action("Edit","Breeds", new {@id = c.BreedId })"><i class="bi bi-pencil"></i></a>
+                            <a title="Delete" class="btn btn-outline-dark" href="@Url.Action("Delete","Breeds", new { @id = c.BreedId})"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="d-flex justify-content-end">
+        <ul class="pagination">
+            @if (ViewBag.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link bi bi-caret-left-fill" href="@Url.Action("Index", "Breeds", new {page = ViewBag.CurrentPage - 1 })"></a>
+                </li>
+            }
+            @for (var i = 1; i <= ViewBag.totalpages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active": "")">
+                    @Html.ActionLink(i.ToString(), "Index", "Breeds", new { page = i }, new { @class = "page-link" })
+                </li>
+            }
+
+            @if (ViewBag.CurrentPage < ViewBag.totalpages)
+            {
+                <li class="page-item">
+                    <a class="page-link bi bi-caret-right-fill" href="@Url.Action("Index", "Breeds", new {page = ViewBag.CurrentPage + 1 })"></a>
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+
+
+
+@section styles{
+
+    <link href="~/Content/icons/font/bootstrap-icons.css" rel="stylesheet" />
+
+}
+
+
+
+

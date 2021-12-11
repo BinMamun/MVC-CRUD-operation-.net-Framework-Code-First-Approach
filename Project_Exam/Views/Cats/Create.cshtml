@@ -1,0 +1,102 @@
+﻿@model Project_Exam.ViewModels.CatCreateViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="row text-center">
+    <div class="col-12">
+        <div><h2>Add new Cat</h2></div>
+    </div>
+</div>
+
+<hr />
+@using (Html.BeginForm("Create", "Cats", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="row form-group mb-2 offset-3">
+                @Html.LabelFor(x => x.CatName, new { @class = "col-form-label col-2" })
+                <div class="col-4">
+                    @Html.TextBoxFor(x => x.CatName, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(x => x.CatName, "", new { @class = "text-danger  col-4" })
+            </div>
+
+            <div class="row form-group mb-2 offset-3">
+                @Html.LabelFor(x => x.Dob, new { @class = "col-form-label col-2" })
+                <div class="col-4">
+                    @Html.TextBoxFor(x => x.Dob, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Dob, "", new { @class = "text-danger  col-4" })
+            </div>
+
+            <div class="row form-group mb-2 offset-3">
+                <label class="col-form-label col-2">Breed</label>
+                <div class="col-4">
+                    @Html.DropDownListFor(x => x.BreedId, new SelectList(ViewBag.Breed, "BreedId", "BreedName"), "----Select Breed----", new { @class = "form-select" })
+                </div>
+                @Html.ValidationMessageFor(x => x.BreedId, "", new { @class = "text-danger col-4" })
+            </div>
+
+
+            <div class="row form-group mb-2 offset-3">
+                @Html.LabelFor(x => x.Gender, new { @class = "col-form-label col-2" })
+                <div class="col-4">
+                    @Html.EnumDropDownListFor(x => x.Gender, "----Select Gender----", new { @class = "form-select" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Gender, "", new { @class = "text-danger  col-4" })
+            </div>
+
+            <div class="row form-group mb-2 offset-3">
+                @Html.LabelFor(x => x.Picture, new { @class = "col-form-label col-2" })
+                <div class="col-4">
+                    @Html.TextBoxFor(x => x.Picture, new { @class = "form-control", type = "file" })
+                </div>
+                @Html.ValidationMessageFor(x => x.Picture, "", new { @class = "text-danger  col-4" })
+            </div>
+
+            <div class="row form-group mb-2 offset-3 ">
+                <div class="col-4 offset-2 pt-2">
+                    <div class="form-check form-check-inline">
+                        @Html.CheckBoxFor(x => x.Available, new { @class = "form-check-input" })
+                        @Html.LabelFor(x => x.Available, new { @class = "orm-check-label" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row offset-3 mb-2">
+
+                <div class="col-4 offset-3">
+                    <button type="submit" class="btn btn-success">Save&nbsp;</button>
+                    <button type="reset" class="btn btn-outline-secondary ">Reset</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-2">
+        @Html.ActionLink("Back to List", "Index", "Cats", new { @class = "btn btn-link" })
+    </div>
+</div>
+
+
+@section styles{
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+}
+
+@section scripts{
+
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+
+    <script>
+        $("#Dob").datepicker({
+            format: "yyyy-mm-dd"
+        })
+    </script>
+}
